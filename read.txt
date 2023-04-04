@@ -1,1 +1,3 @@
 teste novo
+
+modificando o arquivo para verificar o status que ele recebera no git
