@@ -31,7 +31,6 @@ que não era solucionado
 Ao fazer esse ajuste nos codigos, entao ao commitar para o respositorio esse ajuste, o GIT deixará uma versao anterior
 salva como um SNAPSHOT para garantir caso seja necessarios retornar a versao anterior.
 
-![FIGURA 1] D:BACKUP SSD/PROJETOS/DESENVOLVIMENTO_WEB/git-course/tab.png
 
 --------------------------------------------------------------------------------------
    VERSAO 1    |     VERSAO 2    |     VERSAO 3    |     VERSAO 4    |     VERSAO 5
