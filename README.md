@@ -214,10 +214,304 @@ salva como um SNAPSHOT para garantir caso seja necessarios retornar a versao ant
 
 --------------------------------------------------------------------------------
 
-Apor realizar o COMMIT e os arquivos forem adicionados no GIT ele receberá
+Apos realizar o COMMIT e os arquivos forem adicionados no GIT ele receberá
 a sua versao e todos os arquivos passam a ser UNMODIFIED
 
 ---------------------------------------------------------------------------------
+
+###RESUMINDO###
+
+   git status
+      - Mostra como esta o status do repositorio. Untracked, Unmodified, Modified
+   
+   git add <nome do arquivo>
+      - Vai adicionar o arquivo ao repositorio
+   
+Ao verificar o status e observar mudanças que foram necessarias voce poderá
+utilizar o GIT ADD ou diretamente o GIT COMMIT
+
+   git commit -am "mensagem sobre as mudanças feitas para voce ou outros usuarios"]
+      - commit signitica tonar permanente as alterações feitas ou seja, enviar para
+      ser efetivada uma nova versao do arquivo criado
+      - am -  informa que deve ser fazer o envio do projeto e inserir a mensagem.
+      - "mensagem entre aspas"
+
+   Faz parte dos bons costumes inserir as mensagem condizente com as alterações feitas para
+   quem desejar ajudar, ou precisar sabner as ultmas alterações feitas possa no projeto
+
+
+---------------------------------------------------------------------------------
+
+Quando criamos um novo arquivo e o salvamos dentro do repositorio, ou mesmo copiamos
+algum arquivo pra dentro dele, ao utilizar o comando
+
+      Git Status
+
+      O novo arquivo deverá sera marcado no stage como UNTRACKED, ou seja, ele esta 
+      informando que o arquivos existe, esta no repositorios mas que ele ainda nao 
+      foio adicionado ao repositorio.
+
+      Mesmo que voce altere esse arquivo novamente varias vezes antes de add, 
+      ele continuara sendo UNTRACKED
+
+      Dessa forma, apos criarmos os arquivos devemos adiciona-los ao repositorio
+
+      Git Add <nome do arquivo>
+
+      Apos adicionar o arquivo e solitar novamente um git status, 
+      ele será apresentado como "new file" informando que esta pronto para 
+      ser commitado, então basta seguir as recomendações se estiver tudo certo
+
+      git commit -m "mensaghem do commit"
+
+      Após o commit o arquivo ja se encontra dentro do repositorio, mas ainda 
+      nao existe dentrro do BRANCH principal, entao dessa forma se reesvolver 
+      alterar novamente o arquivo e verificar o STATUS esse será apresentado 
+      a voce como MODIFIED
+
+      GIT COMMIT
+         - commit  é o momento quie voce avisa oa GIT para pegar todos os
+         arquivos que estao no repositorio e pede para que seje criado
+         uma imagem deles.
+         - O GIT cria entao uma imaghem daquele arquivos fazendo um SNAPSHOT, 
+         ou seja, criando uma imaghem, uma versao.
+
+         Parta realizar o committ basta digitar
+         - git commit -m "mensagem"
+
+         Se voce digitar git status , depois do commit, voce será informado que esta na
+         BRANCH MASTER ou MAIN e que nao ha mais arquivos para serem commitados.
+
+      Toda vez que voce alterar um arquivo deve se lembrar de fazer o 
+      - Git Add <nome do arquivo> para que o status entenda que existem 
+      arquivos modificados MODIFIED
+
+
+-------------------------------------------------------------------------------------
+##cOMANDO PARA USAR DEPOIS DOP COMMIT##
+
+   Apos fazer o "git commit" verifique o log do repositorio
+
+      - git log
+         mostra as seguintes informaçoes
+         - O autor do commit
+         - a hash do commit
+         - o email do autor
+         - a data 
+         - a mensagem registrada pelo autor
+
+      - git log --decorate
+         mostra tambem
+         - de qual branch para qual branch
+         - se houve murph
+
+      - git log --author "eme"
+         - mostra uma lista dos commits realizados
+         por nome do autor. Pode se escolher um nome
+         ou parte dele
+
+      - git shortlog
+         - Mostra em ordem alfabetica
+            - os autores e quantos commits foram feitos
+            - mostra quais foram os commits
+
+      - git shortlog -sn
+         - mostra a quantidade de commites
+         - mostra as pessoas que fizeram commit e a quanitdade de cada um
+      
+      - git logo --graph
+         - mostra em forma de gráfico o que esta acontecendo com os branchs e
+         as versoes
+
+
+   ###PELA HASH DA PRA VER AS ATUALIZAÇÕES###
+
+      - gist show <cole uma hash aqui>
+         - verifica o que foi mudado/alterado no arquivo
+         - mostra as alterações realizadas
+
+      - git diff
+         - com esse comando voce consegue ver as alterações que 
+         foram realizadas antes de fazer o commit.
+
+         obs: depois de fazer o commit essas informaçoes ficam 
+         indisponiveis para ver as alterações. Se voce ja tiver realizado
+         o commit, precisara realizar os reset para que possa ter acesso
+         novamente
+
+      git diff --name-only
+         - se voce tem uma lista grande de arquivos modificados, como esse
+         comando voce consegue ver uma lista sem precisar analisar um grande log
+
+---------------------------------------------------------------------------------------
+###IMPORTANTE###
+
+      Como regra de boa prática é sempre importante utilizar o comando 
+      git diff
+      antes re realizar o commit, assim voce evita enviar arquivos 
+      com algum erro, evitanto sujar demais seu repositorios.
+
+----------------------------------------------------------------------------------------
+
+##DESFAZENDO COISAS NO GIT##
+
+      Suponhamos que voce tenha feito algumas modificaçoes em seus codigos e de repente
+      descobriu que precisa retrocedes, ou voltar atrás, que nao quer mais essas alterações, 
+      porem voce acabou fazendo o commit desse arquivos
+
+      Existem algumas formas para voce resetar, mas como ja mencionei anteriormente, se voce
+      fizer uso das boas praticas voce ira evitar muito utilizar o reset
+
+      **PARA RESTAURAR A ULTIMA MODIGICAÇÕA**
+
+      Caso tenha realizado alguma modificação mas ainda nao realizou o commit, basta utilizar
+      o seguinte codigo
+
+      - git checkout <nome do arquivo>
+         Esse comando irá retornar o arquivo para antes da ultima edição
+
+      - git resert --HEAD <nome do arquivo>
+
+      As principais formas de reset sao:
+      - git reset --soft <a ultima hash antes do arquivo que pretende resetar>
+         vai pegar as modificações e ira matar o ultimo commit e voltar para staged 
+
+      - gitr reset --mixed <ultima hash antes do arquivo que pretende resetar>
+         vai matar o commit e voltar para antes de staged
+
+      - git reset --hard <ultimo hash antes do aqrquivo que pretende resetar>
+         vai matar tudo que foi feito no commit
+
+      OBS: Voce precisa escolhjer a hash antes do commit que deseja matar.
+            Exermplo: digamos que voce tem 5 commit, porem, deseja matar os dois ultimo, entao
+            voce precisara informar a hash ates desses commits que pretende resetar
+
+
+###O GIT RESET###
+
+      É importante para evitar que voce suba muita sujeira sem importancia, porem,
+      é necessário tomar muito cuidado porque o Git reset altera o historico do comit, ou seja,
+      se voce ja havia dado um PUSH daquel commit e precisou fazer um RESET HARD e resolver
+      subir novamente, o GIT ira informar que existe uma diferença entre o arquivo e o que já
+      está no GIT.
+
+      Se isso ocorrer voce conseguira subir somente com FORCE
+
+      - Use o GIT RESET com muito cuidado.
+
+
+-------------------------------------------------------------------------------------------------
+
+#GITHUB#
+
+### repositório remoto ###
+
+Alem de um repositorio para compartilhar seu codigo e versiona-los, ele é muito urilizado 
+por empresas para nalisar o seu desempenho antes da entrevista ou mesmo antes de entrar
+em contato com voce
+
+-----------------------------------
+
+Se voce ainda nao, o primeiro passo é criar sua conta no git hub.
+acesse esse link [github](https://https://github.com/)
+
+Crie sua conta ou acesse sua conta caso ja tenha
+
+###PARA CRIAR UM NOVO REPOSITORIO REMOTO###
+
+ANTRES DE MAIS NADA PARA EVITAR MAIORES PROBLEMAS NA HORA DE ENVIAR
+CRIE UM ACESSO SSH PELO GIT HUB.
+
+- CONECTE-SE AO GITHUB COM O SSH
+   [ACESSE AQUI](https://docs.github.com/pt/authentication/connecting-to-github-with-ssh)
+
+   [CLIQUE AQUI](https://docs.github.com/pt/authentication/connecting-to-github-with-ssh) 
+   VERIFIQUE SE EXISTE UMA CHAVE EXISTENTE. SIGA OS PASSOS
+
+   [CLIQUE AQUI](https://docs.github.com/pt/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+   SE PRECISAR CRIAR UM NOVA CHAVE SSH
+
+   [CLIQUE AQUI](https://docs.github.com/pt/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+   PARA ADICIONAR UM NOVA CHAVE/KEY SSH NO GITHUB
+
+
+Para voce enviar os arquivos do repositorio local (git)
+para o repositorio remoto (github) voce precisara criar
+dentro do github um novo respositorio.
+
+Para fazer isso, dentro do GITHUB, depois de acessa-lo com sua
+conta criada, basta ir ao lado de sua imaghem de login e clicar no +
+e em "new Repository" e nomea-lo da forma que voce preferir.
+
+
+-----------------------------------------------------------------------------------------
+COMO CRIAR SEU REPOSITORIO PELA LINHA DE COMANDO DO GIT
+
+ECHO "#<digite aqui o nome do seu repositorio no git hub>" >> <README.md>
+git init
+git add README.md
+git commit -am "primeiro commit"
+git remote add origin git@github.com: <nome do seu repositorio criado na primeira linha>.git
+git push -v origin master (em alguns casos como o github fez algumas mudanças, substitua master por main)
+
+-------------------------------------------------------------------------------------------
+CASO JA TENHA CRIADO O NOVO REPOSITORIO NO PROPRIO GITHUB SEGUINDO OS PASSOS ANTERIORES
+UTILIZE APENAS AS LINHAS ABAIXO
+
+-git remote add origin git@github.com:<seu_usuario_no_github>/<nome_do_repositorio_criado>.git
+
+
+###PARA VERIFICAR SE ACESSOU O REPOSITORIO REMOTO###
+
+   -  git remote
+      renornará pra voce "origin"
+
+   - git remote -v
+      mostra mais detalhes do repósitorio
+
+   - git push -u oririn master ou main
+      -u = serve para trackear
+      origin = para onde vai
+      master ou main = branch padrao no github 
+
+   assim foi feita a ligação entre o repostirorio local e o repostirio remoto
+
+------------------------------------------------------------------------------------------------------
+
+##COMO ENVIAR MUDANÇAS DOS MEUS ARQUIVOS APÓS JA TER ENVIADO PARA O
+REPOSITORIO REMOTO (GITHUB)##
+
+   - Depois de realizar as mudanças nos arqauivos voce deverá realizar os comandos
+      - git add - Adicionar
+      - git commit -m -  comitar
+      - git push - enviar 
+
+   Exemplo: 
+
+   - code README.md
+   - realizar as mudanças e salve as mudanças no arquivo README.md
+   - git status para ver se esta modificado
+   - git add README.md
+   - git commit -am "alteração de acertoda na linha tal"
+   - git push -f origin main (ou master)
+   - git log para veirificar se ja esta no repositorio
+
+   Para finalizar entre no github, acesse sua conta ou de um refresh para atualizar a pagina
+   e ver se os aqruivos estão ok
+   
+
+]
+
+
+
+
+
+            
+
+     
+
+   
+
       
    
       
