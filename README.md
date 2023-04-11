@@ -631,7 +631,80 @@ UTILIZE APENAS AS LINHAS ABAIXO
 
 # MERGE E REBASE #
 
-   ## MERGE  ##
+
+      - Ao criarmos um novo BRANCH para fazer modificações ou algum tipo de trabalho
+      será necessario UNIR esses BRANCHs e para isso existem duas forma de fazer essa
+      união que são:
+
+         * MERGE
+         * REBASE
+
+      -- Os doios fazem a mesma coisa, eles unificam os BRANCHs trabalhados mas 
+      de FOMAS DIFERENTES que será necessários conhece-las.
+
+      Aqui vou falar dsobre os dois modelos de unificar os branch e depois vamos
+      aos codigos e usos deles.
+
+
+## MERGE  ## 
+
+      No MERGE, suponhamos que temos o MASTER ou MAIN e criamos um novo BRANCH para trabalhar nele.
+      Então ficaria encontrariamos nosso respositorio da seguinte forma onde criamos o novo branch 
+      chamado de newb553
+
+                  |                 |     MASTER      
+      COMMIT 0    <     COMMIT 1    <     COMMIT2     
+                  |                 |     newB553
+
+      - Depoios de criar o novo Branch vamos criar um novo COMMIT  dentro do Branch newb553, 
+      que será o COMMIT 3 e depois criamos novo BRANCH HOTFIX com o COMMIT 4 
+
+                  |                 |     MASTER                        |     hotfix
+      COMMIT 0    <     COMMIT 1    <     COMMIT2     <     COMMIT 3    <     COMMIT 4
+                  |                 |     newB553     |     COMMIT 3
+                                       
+
+      - Os dois branchs criados estao com seuc commits apontados para MASTER, porem 
+      para unificar esses dois BRANCH será nessarios criar um novo COMMIT 5 para fazer a 
+      união do novos BRANCH criados no repositorio. apesar de se apresnetar de forma linear
+      o repositorio ficará bastante sobrecarregado ou com muita sujeira.
+
+### VANTAGENS DO MERGE ###
+
+      PRÓS        >     * OPERAÇÃO NA DESTRUTIVA
+                        * MANTER O REPOSITORIO ORGANIZADO
+
+      CONTRATO    >     * CRIAÇÃO DE COMMIT EXTRA
+                        * EXCESSO DE COMMIT SEM SENTIDO
+                        * DEIXA HISTÓRICO POLUIDO
+                        * CAUSA CONFUSÃO NA HORA DE ANALISAR OS COMMITS
+
+
+## REBASE ##
+
+      - É mais simples que o MERGE, porem cumpre seu pape de UNIR os BRANCHS.
+
+      - Esse vaso vamos criar criar duas novas branchs
+
+                  |                                                     |     MASTER      |     MASTER      
+      COMMIT 0    <     COMMIT 1    <     COMMIT2     <     COMMIT 3    <     COMMIT 4    <     COMMIT 3'
+                                                      |     newBRANCH           
+
+      - No caso do uso do REBASE para unificar os BRANCHs, ao aplicar as modificações
+      ele mata completamente o COMMIT 3 onde esta o newBranch e cria um COMMIT 3' 
+      (commmit 3 linha) no topo a frente dos demais commits.
+
+      PROS        >       * EVITA CRIAÇÃO DE COMMITS EXTRA
+                          * HISTORIO FICA SEMPRE EM LINHA SEM VARIOS AGRUPAMENTOS
+
+      CONTRA      >       * PERDE TODA ORDEM CRONOLOGICA 
+                          * MUDA TODO HISTORICO FACILMENTE
+                          * PODE OCASIONAR PROBLEMAS POR CONTA DA DESORGANIZAÇÃO    
+      
+
+      
+
+
 
          
 
